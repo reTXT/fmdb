@@ -3,6 +3,9 @@
 #import "FMDatabasePool.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
+
 #if ! __has_feature(objc_arc)
     #define FMDBAutorelease(__v) ([__v autorelease]);
     #define FMDBReturnAutoreleased FMDBAutorelease
@@ -113,7 +116,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
 /** Dictionary of cached statements */
 
-@property (atomic, retain) NSMutableDictionary *cachedStatements;
+@property (atomic, retain, nullable) NSMutableDictionary *cachedStatements;
 
 ///---------------------
 /// @name Initialization
@@ -145,7 +148,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-+ (instancetype)databaseWithPath:(NSString*)inPath;
++ (instancetype)databaseWithPath:(nullable NSString*)inPath;
 
 /** Initialize a `FMDatabase` object.
  
@@ -173,7 +176,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-- (instancetype)initWithPath:(NSString*)inPath;
+- (instancetype)initWithPath:(nullable NSString*)inPath;
 
 
 ///-----------------------------------
@@ -243,7 +246,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see close
  */
 
-- (BOOL)openWithFlags:(int)flags vfs:(NSString *)vfsName;
+- (BOOL)openWithFlags:(int)flags vfs:(nullable NSString *)vfsName;
 
 /** Closing a database connection
  
@@ -476,7 +479,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-- (BOOL)executeStatements:(NSString *)sql withResultBlock:(FMDBExecuteStatementsCallbackBlock)block;
+- (BOOL)executeStatements:(NSString *)sql withResultBlock:(nullable FMDBExecuteStatementsCallbackBlock)block;
 
 /** Last insert rowid
  
@@ -530,7 +533,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @note If you want to use this from Swift, please note that you must include `FMDatabaseVariadic.swift` in your project. Without that, you cannot use this method directly, and instead have to use methods such as `<executeQuery:withArgumentsInArray:>`.
  */
 
-- (FMResultSet *)executeQuery:(NSString*)sql, ...;
+- (nullable FMResultSet *)executeQuery:(NSString*)sql, ...;
 
 /** Execute select statement
 
@@ -560,7 +563,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  
  */
 
-- (FMResultSet *)executeQueryWithFormat:(NSString*)format, ... NS_FORMAT_FUNCTION(1,2);
+- (nullable FMResultSet *)executeQueryWithFormat:(NSString*)format, ... NS_FORMAT_FUNCTION(1,2);
 
 /** Execute select statement
 
@@ -579,7 +582,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see [`FMResultSet next`](<[FMResultSet next]>)
  */
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments;
+- (nullable FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments;
 
 /** Execute select statement
  
@@ -608,7 +611,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-- (FMResultSet *)executeQuery:(NSString *)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error;
+- (nullable FMResultSet *)executeQuery:(NSString *)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error;
 
 /** Execute select statement
 
@@ -626,11 +629,11 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see [`FMResultSet next`](<[FMResultSet next]>)
  */
 
-- (FMResultSet *)executeQuery:(NSString *)sql withParameterDictionary:(NSDictionary *)arguments;
+- (nullable FMResultSet *)executeQuery:(NSString *)sql withParameterDictionary:(NSDictionary *)arguments;
 
 
 // Documentation forthcoming.
-- (FMResultSet *)executeQuery:(NSString*)sql withVAList: (va_list)args;
+- (nullable FMResultSet *)executeQuery:(NSString*)sql withVAList: (va_list)args;
 
 ///-------------------
 /// @name Transactions
@@ -829,7 +832,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  
  */
 
-- (NSString*)lastErrorMessage;
+- (nullable NSString*)lastErrorMessage;
 
 /** Last error code
  
@@ -866,7 +869,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  
  */
 
-- (NSError*)lastError;
+- (nullable NSError*)lastError;
 
 
 // description forthcoming
@@ -1011,7 +1014,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see [sqlite3_create_function()](http://sqlite.org/c3ref/create_function.html)
  */
 
-- (void)makeFunctionNamed:(NSString*)name maximumArguments:(int)count withBlock:(void (^)(void *context, int argc, void **argv))block;
+- (void)makeFunctionNamed:(NSString*)name maximumArguments:(int)count withBlock:(void (^)(void *context, int argc, void *__nullable *__nonnull argv))block;
 
 
 ///---------------------
@@ -1083,7 +1086,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see storeableDateFormat:
  */
 
-- (NSDate *)dateFromString:(NSString *)s;
+- (nullable NSDate *)dateFromString:(NSString *)s;
 
 /** Convert the supplied NSDate to NSString, using the current database formatter.
  
@@ -1098,7 +1101,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see storeableDateFormat:
  */
 
-- (NSString *)stringFromDate:(NSDate *)date;
+- (nullable NSString *)stringFromDate:(NSDate *)date;
 
 @end
 
@@ -1160,3 +1163,5 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
 #pragma clang diagnostic pop
 
+
+NS_ASSUME_NONNULL_END

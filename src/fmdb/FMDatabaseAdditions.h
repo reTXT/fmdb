@@ -10,6 +10,9 @@
 #import "FMDatabase.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
+
 /** Category of additions for `<FMDatabase>` class.
  
  ### See also
@@ -81,7 +84,7 @@
  @note To use this method from Swift, you must include `FMDatabaseAdditionsVariadic.swift` in your project.
  */
 
-- (NSString*)stringForQuery:(NSString*)query, ...;
+- (nullable NSString*)stringForQuery:(NSString*)query, ...;
 
 /** Return `NSData` value for query
 
@@ -93,7 +96,7 @@
  @note To use this method from Swift, you must include `FMDatabaseAdditionsVariadic.swift` in your project.
  */
 
-- (NSData*)dataForQuery:(NSString*)query, ...;
+- (nullable NSData*)dataForQuery:(NSString*)query, ...;
 
 /** Return `NSDate` value for query
 
@@ -105,7 +108,7 @@
  @note To use this method from Swift, you must include `FMDatabaseAdditionsVariadic.swift` in your project.
  */
 
-- (NSDate*)dateForQuery:(NSString*)query, ...;
+- (nullable NSDate*)dateForQuery:(NSString*)query, ...;
 
 
 // Notice that there's no dataNoCopyForQuery:.
@@ -141,7 +144,7 @@
  @see [SQLite File Format](http://www.sqlite.org/fileformat.html)
  */
 
-- (FMResultSet*)getSchema;
+- (nullable FMResultSet*)getSchema;
 
 /** The schema of the database.
 
@@ -165,7 +168,7 @@
  @see [table_info](http://www.sqlite.org/pragma.html#pragma_table_info)
  */
 
-- (FMResultSet*)getTableSchema:(NSString*)tableName;
+- (nullable FMResultSet*)getTableSchema:(NSString*)tableName;
 
 /** Test to see if particular column exists for particular table in database
  
@@ -240,7 +243,7 @@
  */
 
 
-- (NSString*)applicationIDString;
+- (nullable NSString*)applicationIDString;
 
 /** Set the application ID string
 
@@ -276,3 +279,6 @@
 - (void)setUserVersion:(uint32_t)version;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

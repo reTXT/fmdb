@@ -1,5 +1,9 @@
 #import <Foundation/Foundation.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+
 #ifndef __has_feature      // Optional.
 #define __has_feature(x) 0 // Compatibility with non-clang compilers.
 #endif
@@ -65,7 +69,7 @@
 
 - (void)close;
 
-- (void)setParentDB:(FMDatabase *)newDb;
+- (void)setParentDB:(nullable FMDatabase *)newDb;
 
 ///---------------------------------------
 /// @name Iterating through the result set
@@ -253,7 +257,7 @@
  
  */
 
-- (NSString*)stringForColumn:(NSString*)columnName;
+- (nullable NSString*)stringForColumn:(NSString*)columnName;
 
 /** Result set `NSString` value for column.
 
@@ -262,7 +266,7 @@
  @return `NSString` value of the result set's column.
  */
 
-- (NSString*)stringForColumnIndex:(int)columnIdx;
+- (nullable NSString*)stringForColumnIndex:(int)columnIdx;
 
 /** Result set `NSDate` value for column.
 
@@ -271,7 +275,7 @@
  @return `NSDate` value of the result set's column.
  */
 
-- (NSDate*)dateForColumn:(NSString*)columnName;
+- (nullable NSDate*)dateForColumn:(NSString*)columnName;
 
 /** Result set `NSDate` value for column.
 
@@ -281,7 +285,7 @@
  
  */
 
-- (NSDate*)dateForColumnIndex:(int)columnIdx;
+- (nullable NSDate*)dateForColumnIndex:(int)columnIdx;
 
 /** Result set `NSData` value for column.
  
@@ -293,7 +297,7 @@
  
  */
 
-- (NSData*)dataForColumn:(NSString*)columnName;
+- (nullable NSData*)dataForColumn:(NSString*)columnName;
 
 /** Result set `NSData` value for column.
 
@@ -302,7 +306,7 @@
  @return `NSData` value of the result set's column.
  */
 
-- (NSData*)dataForColumnIndex:(int)columnIdx;
+- (nullable NSData*)dataForColumnIndex:(int)columnIdx;
 
 /** Result set `(const unsigned char *)` value for column.
 
@@ -311,7 +315,7 @@
  @return `(const unsigned char *)` value of the result set's column.
  */
 
-- (const unsigned char *)UTF8StringForColumnName:(NSString*)columnName;
+- (nullable const unsigned char *)UTF8StringForColumnName:(NSString*)columnName;
 
 /** Result set `(const unsigned char *)` value for column.
 
@@ -320,7 +324,7 @@
  @return `(const unsigned char *)` value of the result set's column.
  */
 
-- (const unsigned char *)UTF8StringForColumnIndex:(int)columnIdx;
+- (nullable const unsigned char *)UTF8StringForColumnIndex:(int)columnIdx;
 
 /** Result set object for column.
 
@@ -398,7 +402,7 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
  
  */
 
-- (NSData*)dataNoCopyForColumn:(NSString*)columnName NS_RETURNS_NOT_RETAINED;
+- (nullable NSData*)dataNoCopyForColumn:(NSString*)columnName NS_RETURNS_NOT_RETAINED;
 
 /** Result set `NSData` value for column.
 
@@ -412,7 +416,7 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
 
  */
 
-- (NSData*)dataNoCopyForColumnIndex:(int)columnIdx NS_RETURNS_NOT_RETAINED;
+- (nullable NSData*)dataNoCopyForColumnIndex:(int)columnIdx NS_RETURNS_NOT_RETAINED;
 
 /** Is the column `NULL`?
  
@@ -466,3 +470,5 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
  
 @end
 
+
+NS_ASSUME_NONNULL_END

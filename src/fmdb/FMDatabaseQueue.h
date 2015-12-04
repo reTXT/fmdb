@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class FMDatabase;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 /** To perform queries and updates on multiple threads, you'll want to use `FMDatabaseQueue`.
 
@@ -70,7 +74,7 @@
 
 /** Path of database */
 
-@property (atomic, retain) NSString *path;
+@property (atomic, retain, nullable) NSString *path;
 
 /** Open flags */
 
@@ -91,7 +95,7 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath;
++ (instancetype)databaseQueueWithPath:(nullable NSString*)aPath;
 
 /** Create queue using path and specified flags.
  
@@ -100,7 +104,7 @@
  
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
-+ (instancetype)databaseQueueWithPath:(NSString*)aPath flags:(int)openFlags;
++ (instancetype)databaseQueueWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create queue using path.
 
@@ -109,7 +113,7 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath;
+- (instancetype)initWithPath:(nullable NSString*)aPath;
 
 /** Create queue using path and specified flags.
  
@@ -119,7 +123,7 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags;
+- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create queue using path and specified flags.
  
@@ -130,7 +134,7 @@
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName;
+- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
  
@@ -185,3 +189,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

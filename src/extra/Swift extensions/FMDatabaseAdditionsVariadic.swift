@@ -15,7 +15,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns the T value if value is found. Returns nil if column is NULL or upon error.
     
-    private func valueForQuery<T>(sql: String, values: [AnyObject]?, completionHandler:(FMResultSet)->(T!)) -> T! {
+    private func valueForQuery<T>(sql: String, values: [AnyObject], completionHandler:(FMResultSet)->(T!)) -> T! {
         var result: T!
         
         if let rs = executeQuery(sql, withArgumentsInArray: values) {

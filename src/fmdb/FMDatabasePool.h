@@ -10,6 +10,10 @@
 
 @class FMDatabase;
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+
 /** Pool of `<FMDatabase>` objects.
 
  ### See also
@@ -45,11 +49,11 @@
 
 /** Database path */
 
-@property (atomic, retain) NSString *path;
+@property (atomic, retain, nullable) NSString *path;
 
 /** Delegate object */
 
-@property (atomic, assign) id delegate;
+@property (atomic, assign, nullable) id delegate;
 
 /** Maximum number of databases to create */
 
@@ -61,7 +65,7 @@
 
 /**  Custom virtual file system name */
 
-@property (atomic, copy) NSString *vfsName;
+@property (atomic, copy, nullable) NSString *vfsName;
 
 
 ///---------------------
@@ -75,7 +79,7 @@
  @return The `FMDatabasePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath;
++ (instancetype)databasePoolWithPath:(nullable NSString*)aPath;
 
 /** Create pool using path and specified flags
 
@@ -85,7 +89,7 @@
  @return The `FMDatabasePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags;
++ (instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create pool using path.
 
@@ -94,7 +98,7 @@
  @return The `FMDatabasePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath;
+- (instancetype)initWithPath:(nullable NSString*)aPath;
 
 /** Create pool using path and specified flags.
 
@@ -104,7 +108,7 @@
  @return The `FMDatabasePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags;
+- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create pool using path and specified flags.
 
@@ -115,7 +119,7 @@
  @return The `FMDatabasePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName;
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
 
@@ -171,14 +175,14 @@
  @param block The code to be run on the `FMDatabasePool` pool.
  */
 
-- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *__nullable rollback))block;
 
 /** Synchronously perform database operations in pool using deferred transaction.
 
  @param block The code to be run on the `FMDatabasePool` pool.
  */
 
-- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *__nullable rollback))block;
 
 /** Synchronously perform database operations in pool using save point.
 
@@ -189,7 +193,7 @@
  @warning You can not nest these, since calling it will pull another database out of the pool and you'll get a deadlock. If you need to nest, use `<[FMDatabase startSavePointWithName:error:]>` instead.
 */
 
-- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block;
+- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *__nullable rollback))block;
 
 @end
 
@@ -223,3 +227,5 @@
 
 @end
 
+
+NS_ASSUME_NONNULL_END
