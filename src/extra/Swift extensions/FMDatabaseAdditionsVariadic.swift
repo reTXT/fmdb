@@ -39,7 +39,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns string value if value is found. Returns nil if column is NULL or upon error.
     
-    func stringForQuery(sql: String, _ values: AnyObject...) -> String! {
+    public func stringForQuery(sql: String, _ values: AnyObject...) -> String! {
         return valueForQuery(sql, values: values) { $0.stringForColumnIndex(0) }
     }
     
@@ -51,7 +51,7 @@ extension FMDatabase {
     ///
     /// - returns:       This returns integer value if value is found. Returns nil if column is NULL or upon error.
     
-    func intForQuery(sql: String, _ values: AnyObject...) -> Int32! {
+    public func intForQuery(sql: String, _ values: AnyObject...) -> Int32! {
         return valueForQuery(sql, values: values) { $0.intForColumnIndex(0) }
     }
     
@@ -63,7 +63,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns long value if value is found. Returns nil if column is NULL or upon error.
     
-    func longForQuery(sql: String, _ values: AnyObject...) -> Int! {
+    public func longForQuery(sql: String, _ values: AnyObject...) -> Int! {
         return valueForQuery(sql, values: values) { $0.longForColumnIndex(0) }
     }
     
@@ -75,7 +75,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns Bool value if value is found. Returns nil if column is NULL or upon error.
     
-    func boolForQuery(sql: String, _ values: AnyObject...) -> Bool! {
+    public func boolForQuery(sql: String, _ values: AnyObject...) -> Bool! {
         return valueForQuery(sql, values: values) { $0.boolForColumnIndex(0) }
     }
     
@@ -87,7 +87,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns Double value if value is found. Returns nil if column is NULL or upon error.
     
-    func doubleForQuery(sql: String, _ values: AnyObject...) -> Double! {
+    public func doubleForQuery(sql: String, _ values: AnyObject...) -> Double! {
         return valueForQuery(sql, values: values) { $0.doubleForColumnIndex(0) }
     }
     
@@ -99,7 +99,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns NSDate value if value is found. Returns nil if column is NULL or upon error.
     
-    func dateForQuery(sql: String, _ values: AnyObject...) -> NSDate! {
+    public func dateForQuery(sql: String, _ values: AnyObject...) -> NSDate! {
         return valueForQuery(sql, values: values) { $0.dateForColumnIndex(0) }
     }
     
@@ -111,7 +111,7 @@ extension FMDatabase {
     ///
     /// - returns:                      This returns NSData value if value is found. Returns nil if column is NULL or upon error.
     
-    func dataForQuery(sql: String, _ values: AnyObject...) -> NSData! {
+    public func dataForQuery(sql: String, _ values: AnyObject...) -> NSData! {
         return valueForQuery(sql, values: values) { $0.dataForColumnIndex(0) }
     }
 }
