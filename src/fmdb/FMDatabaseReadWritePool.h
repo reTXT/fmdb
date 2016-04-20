@@ -80,17 +80,31 @@ NS_ASSUME_NONNULL_BEGIN
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(nullable NSString*)aPath;
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath;
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath error:(NSError **)error;
 
 /** Create pool using path and specified flags
-
+ 
  @param aPath The file path of the database.
  @param openFlags Flags passed to the openWithFlags method of the database
-
+ 
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags;
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags;
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags error:(NSError **)error;
+
+/** Create pool using path and specified flags
+ 
+ @param aPath The file path of the database.
+ @param openFlags Flags passed to the openWithFlags method of the database
+ @param vfsName The name of a custom virtual file system
+ 
+ @return The `FMDatabaseReadWritePool` object. `nil` on error.
+ */
+
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName;
++ (nullable instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName error:(NSError **)error;
 
 /** Create pool using path.
 
@@ -99,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(nullable NSString*)aPath;
+- (nullable instancetype)initWithPath:(nullable NSString*)aPath error:(NSError **)error;
 
 /** Create pool using path and specified flags.
 
@@ -109,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags;
+- (nullable instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags error:(NSError **)error;
 
 /** Create pool using path and specified flags.
 
@@ -120,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName;
+- (nullable instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName error:(NSError **)error;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
 

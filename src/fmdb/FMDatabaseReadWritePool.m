@@ -43,15 +43,31 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
 @synthesize cacheConnections=_cacheConnections;
 
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath]);
++ (instancetype)databasePoolWithPath:(NSString*)aPath  {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath error:nil]);
+}
+
++ (instancetype)databasePoolWithPath:(NSString*)aPath error:(NSError **)error  {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath error:error]);
 }
 
 + (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags]);
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags error:nil]);
 }
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName {
++ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags error:(NSError **)error {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags error:error]);
+}
+
++ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags vfs:vfsName error:nil]);
+}
+
++ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName error:(NSError **)error {
+    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags vfs:vfsName error:error]);
+}
+
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName error:(NSError **)error {
     
     openFlags &= ~(SQLITE_OPEN_CREATE | SQLITE_OPEN_READONLY | SQLITE_OPEN_READWRITE);
     
@@ -72,7 +88,8 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
       
         __block BOOL valid = NO;
         [self inWritableDatabase:^(FMDatabase * _Nonnull db) {
-            valid = [db executeStatements:@"PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL;"];
+            valid = [db executeStatements:@"PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL;"
+                                    error:error];
         }];
       
         if (!valid) {
@@ -83,18 +100,18 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
     return self;
 }
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
-    return [self initWithPath:aPath flags:openFlags vfs:nil];
+- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags error:(NSError **)error {
+    return [self initWithPath:aPath flags:openFlags vfs:nil error:error];
 }
 
-- (instancetype)initWithPath:(NSString*)aPath
+- (instancetype)initWithPath:(NSString*)aPath error:(NSError **)error
 {
     // default flags for sqlite3_open
-    return [self initWithPath:aPath flags:0];
+    return [self initWithPath:aPath flags:0 error:error];
 }
 
 - (instancetype)init {
-    return [self initWithPath:nil];
+    return [self initWithPath:nil error:nil];
 }
 
 + (Class)databaseClass {

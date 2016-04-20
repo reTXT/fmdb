@@ -460,6 +460,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  */
 
 - (BOOL)executeStatements:(NSString *)sql;
+- (BOOL)executeStatements:(NSString *)sql error:(NSError **)error;
 
 /** Execute multiple SQL statements with callback handler
  

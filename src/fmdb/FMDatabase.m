@@ -1211,7 +1211,32 @@ int FMDBExecuteBulkSQLCallback(void *theBlockAsVoid, int columns, char **values,
 }
 
 - (BOOL)executeStatements:(NSString *)sql {
-    return [self executeStatements:sql withResultBlock:nil];
+    return [self executeStatements:sql error:nil];
+}
+
+- (BOOL)executeStatements:(NSString *)sql error:(NSError **)error {
+
+    int rc;
+    char *errmsg = nil;
+    
+    rc = sqlite3_exec([self sqliteHandle], [sql UTF8String], nil, NULL, &errmsg);
+    
+    if (errmsg) {
+        
+        if (error) {
+            *error = [NSError errorWithDomain:@"FMDatabase"
+                                         code:rc
+                                     userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithUTF8String:errmsg]                                                                               }];
+        }
+        
+        if ([self logsErrors]) {
+            NSLog(@"Error inserting batch: %s", errmsg);
+        }
+        
+        sqlite3_free(errmsg);
+    }
+    
+    return (rc == SQLITE_OK);
 }
 
 - (BOOL)executeStatements:(NSString *)sql withResultBlock:(FMDBExecuteStatementsCallbackBlock)block {
