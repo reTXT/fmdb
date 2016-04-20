@@ -108,6 +108,7 @@
 }
 
 - (void)testApplicationID {
+#if TARGET_OS_MAC && !TARGET_OS_IPHONE
 #if SQLITE_VERSION_NUMBER >= 3007017
     uint32_t appID = NSHFSTypeCodeFromFileType(NSFileTypeForHFSTypeCode('fmdb'));
     
@@ -122,10 +123,12 @@
     NSString *s = [self.db applicationIDString];
     
     XCTAssertEqualObjects(s, @"acrn");
+    
 #else
     NSString *errorMessage = NSLocalizedString(@"Application ID functions require SQLite 3.7.17", nil);
     XCTFail("%@", errorMessage);
     if (self.db.logsErrors) NSLog(@"%@", errorMessage);
+#endif
 #endif
 }
 

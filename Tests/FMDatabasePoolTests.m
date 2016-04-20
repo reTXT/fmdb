@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "FMDatabasePool.h"
 
 @interface FMDatabasePoolTests : FMDBTempDBTests
 
