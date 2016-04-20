@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
 
   # build the latest stable version of sqlite3
   s.subspec 'standalone' do |ss|
-    ss.default_subspec = 'default'    
     ss.xcconfig = { 'OTHER_CFLAGS' => '$(inherited) -DFMDB_SQLITE_STANDALONE' }
     
     ss.subspec 'default' do |sss|
