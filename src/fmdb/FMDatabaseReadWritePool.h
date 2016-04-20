@@ -10,6 +10,10 @@
 
 @class FMDatabase;
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+
 /** Reader/Writer pool of `<FMDatabase>` objects.
  
  Uses SQLite's WAL mode to allow multiple readers, single writer access to a single database.
@@ -39,11 +43,11 @@
 
 /** Database path */
 
-@property (atomic, retain) NSString *path;
+@property (atomic, retain, nullable) NSString *path;
 
 /** Delegate object */
 
-@property (atomic, assign) id delegate;
+@property (atomic, assign, nullable) id delegate;
 
 /** Maximum number of databases to create */
 
@@ -59,7 +63,7 @@
 
 /**  Custom virtual file system name */
 
-@property (atomic, copy) NSString *vfsName;
+@property (atomic, copy, nullable) NSString *vfsName;
 
 /** Enabled/disable connection caching */
 
@@ -76,7 +80,7 @@
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath;
++ (instancetype)databasePoolWithPath:(nullable NSString*)aPath;
 
 /** Create pool using path and specified flags
 
@@ -86,7 +90,7 @@
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-+ (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags;
++ (instancetype)databasePoolWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create pool using path.
 
@@ -95,7 +99,7 @@
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath;
+- (instancetype)initWithPath:(nullable NSString*)aPath;
 
 /** Create pool using path and specified flags.
 
@@ -105,7 +109,7 @@
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags;
+- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags;
 
 /** Create pool using path and specified flags.
 
@@ -116,7 +120,7 @@
  @return The `FMDatabaseReadWritePool` object. `nil` on error.
  */
 
-- (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags vfs:(NSString *)vfsName;
+- (instancetype)initWithPath:(nullable NSString*)aPath flags:(int)openFlags vfs:(nullable NSString *)vfsName;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
 
@@ -234,3 +238,5 @@
 
 @end
 
+
+NS_ASSUME_NONNULL_END
