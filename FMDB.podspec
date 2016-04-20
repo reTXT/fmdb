@@ -16,6 +16,11 @@ Pod::Spec.new do |s|
     ss.exclude_files = 'src/fmdb.m'
   end
 
+  s.subspec 'swift' do |ss|
+    ss.source_files = 'src/extra/Swift extensions/*.{swift}'
+    ss.dependency 'FMDB/standard'
+  end
+
   # use the built-in library version of sqlite3 with custom FTS tokenizer source files
   s.subspec 'FTS' do |ss|
     ss.source_files = 'src/extra/fts3/*.{h,m}'
@@ -24,7 +29,6 @@ Pod::Spec.new do |s|
 
   # build the latest stable version of sqlite3
   s.subspec 'standalone' do |ss|
-    ss.default_subspec = 'default'    
     ss.xcconfig = { 'OTHER_CFLAGS' => '$(inherited) -DFMDB_SQLITE_STANDALONE' }
     
     ss.subspec 'default' do |sss|
