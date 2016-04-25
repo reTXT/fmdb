@@ -335,7 +335,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see objectForKeyedSubscript:
  */
 
-- (id)objectForColumnName:(NSString*)columnName;
+- (nullable id)objectForColumnName:(NSString*)columnName;
 
 /** Result set object for column.
 
@@ -346,7 +346,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see objectAtIndexedSubscript:
  */
 
-- (id)objectForColumnIndex:(int)columnIdx;
+- (nullable id)objectForColumnIndex:(int)columnIdx;
 
 /** Result set object for column.
  
@@ -367,7 +367,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return Either `NSNumber`, `NSString`, `NSData`, or `NSNull`. If the column was `NULL`, this returns `[NSNull null]` object.
  */
 
-- (id)objectForKeyedSubscript:(NSString *)columnName;
+- (nullable id)objectForKeyedSubscript:(NSString *)columnName;
 
 /** Result set object for column.
 
@@ -388,7 +388,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return Either `NSNumber`, `NSString`, `NSData`, or `NSNull`. If the column was `NULL`, this returns `[NSNull null]` object.
  */
 
-- (id)objectAtIndexedSubscript:(int)columnIdx;
+- (nullable id)objectAtIndexedSubscript:(int)columnIdx;
 
 /** Result set `NSData` value for column.
 

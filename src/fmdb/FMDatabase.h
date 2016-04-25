@@ -377,7 +377,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see lastErrorMessage
  */
 
-- (BOOL)executeUpdate:(NSString*)sql withArgumentsInArray:(NSArray *)arguments;
+- (BOOL)executeUpdate:(NSString*)sql withArgumentsInArray:(nullable NSArray *)arguments;
 
 /** Execute single update statement
  
@@ -424,7 +424,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  @see lastErrorMessage
 */
 
-- (BOOL)executeUpdate:(NSString*)sql withParameterDictionary:(NSDictionary *)arguments;
+- (BOOL)executeUpdate:(NSString*)sql withParameterDictionary:(nullable NSDictionary *)arguments;
 
 
 /** Execute single update statement
