@@ -44,6 +44,17 @@
 		83C73F2F1C326D2F00FFC730 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C73F0B1C326ADA00FFC730 /* FMDB.framework */; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* fmdb.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* fmdb.1 */; };
+		AA05D24B1CC940280051039E /* FMBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D24A1CC940280051039E /* FMBlob.m */; };
+		AA05D24C1CC9403A0051039E /* FMBlob.h in Headers */ = {isa = PBXBuildFile; fileRef = AA05D2491CC940280051039E /* FMBlob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA05D24D1CC9403B0051039E /* FMBlob.h in Headers */ = {isa = PBXBuildFile; fileRef = AA05D2491CC940280051039E /* FMBlob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA05D24E1CC9403B0051039E /* FMBlob.h in Headers */ = {isa = PBXBuildFile; fileRef = AA05D2491CC940280051039E /* FMBlob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA05D24F1CC9403C0051039E /* FMBlob.h in Headers */ = {isa = PBXBuildFile; fileRef = AA05D2491CC940280051039E /* FMBlob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA05D2501CC9403F0051039E /* FMBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D24A1CC940280051039E /* FMBlob.m */; };
+		AA05D2511CC940410051039E /* FMBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D24A1CC940280051039E /* FMBlob.m */; };
+		AA05D2521CC940420051039E /* FMBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D24A1CC940280051039E /* FMBlob.m */; };
+		AA05D2531CC940420051039E /* FMBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D24A1CC940280051039E /* FMBlob.m */; };
+		AA05D2551CC9454B0051039E /* FMBlobTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D2541CC9454B0051039E /* FMBlobTests.m */; };
+		AA05D2561CC9454B0051039E /* FMBlobTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05D2541CC9454B0051039E /* FMBlobTests.m */; };
 		AA19C1B21CC76CC4008AFE48 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9E4EB713B31188005F9210 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA19C1B31CC76CC6008AFE48 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9E4EB713B31188005F9210 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA19C1B41CC76CE7008AFE48 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CC9E4EB713B31188005F9210 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,6 +175,9 @@
 		83C73F301C326D8600FFC730 /* FMDB.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = FMDB.podspec; sourceTree = "<group>"; };
 		83C73F311C326FA600FFC730 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/fmdb/Info.plist; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* fmdb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fmdb; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA05D2491CC940280051039E /* FMBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMBlob.h; path = src/fmdb/FMBlob.h; sourceTree = "<group>"; };
+		AA05D24A1CC940280051039E /* FMBlob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMBlob.m; path = src/fmdb/FMBlob.m; sourceTree = "<group>"; };
+		AA05D2541CC9454B0051039E /* FMBlobTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMBlobTests.m; sourceTree = "<group>"; };
 		AA19C1BC1CC7F35F008AFE48 /* FMDatabasePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabasePool.swift; path = "src/extra/Swift extensions/FMDatabasePool.swift"; sourceTree = "<group>"; };
 		AA19C1BE1CC7F44B008AFE48 /* FMDatabaseReadWritePool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseReadWritePool.swift; path = "src/extra/Swift extensions/FMDatabaseReadWritePool.swift"; sourceTree = "<group>"; };
 		AAB002B61CC75F9800A2C7EB /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -348,6 +362,8 @@
 				AAB002B81CC769CE00A2C7EB /* FMDatabasePool.m */,
 				AAB002B91CC769CE00A2C7EB /* FMDatabaseReadWritePool.h */,
 				CC9E4EB813B31188005F9210 /* FMDatabaseReadWritePool.m */,
+				AA05D2491CC940280051039E /* FMBlob.h */,
+				AA05D24A1CC940280051039E /* FMBlob.m */,
 				83C73F311C326FA600FFC730 /* Info.plist */,
 			);
 			name = fmdb;
@@ -408,6 +424,7 @@
 				BF940F5B18417D490001E077 /* FMDBTempDBTests.m */,
 				3354379B19E71096005661F3 /* FMResultSetTests.m */,
 				BF5D041B18416BB2008C5AA9 /* Supporting Files */,
+				AA05D2541CC9454B0051039E /* FMBlobTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -451,6 +468,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA05D24D1CC9403B0051039E /* FMBlob.h in Headers */,
 				40A146001BE575D000E5D35E /* FMDatabase.h in Headers */,
 				40A146011BE575D600E5D35E /* FMResultSet.h in Headers */,
 				AAB002C21CC76A9600A2C7EB /* FMDatabaseReadWritePool.h in Headers */,
@@ -465,6 +483,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA05D24E1CC9403B0051039E /* FMBlob.h in Headers */,
 				83C73F181C326BAB00FFC730 /* FMDB.h in Headers */,
 				83C73F191C326BAB00FFC730 /* FMDatabase.h in Headers */,
 				83C73F1A1C326BAB00FFC730 /* FMResultSet.h in Headers */,
@@ -479,6 +498,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA05D24F1CC9403C0051039E /* FMBlob.h in Headers */,
 				83C73F231C326BD600FFC730 /* FMDB.h in Headers */,
 				83C73F241C326BD600FFC730 /* FMDatabase.h in Headers */,
 				83C73F251C326BD600FFC730 /* FMResultSet.h in Headers */,
@@ -499,6 +519,7 @@
 				AAB002BF1CC76A8500A2C7EB /* FMDatabaseReadWritePool.h in Headers */,
 				8314AF3318CD73D600EC0E25 /* FMDB.h in Headers */,
 				CC9E4EBA13B31188005F9210 /* FMDatabasePool.h in Headers */,
+				AA05D24C1CC9403A0051039E /* FMBlob.h in Headers */,
 				CC9E4EBA13B31188005F9210 /* FMDatabasePool.h in Headers */,
 				CC9E4EBA13B31188005F9210 /* FMDatabasePool.h in Headers */,
 				CC47A00F148581E9002CCDAB /* FMDatabaseQueue.h in Headers */,
@@ -722,6 +743,7 @@
 				AAB002BC1CC76A4E00A2C7EB /* FMDatabasePool.m in Sources */,
 				AA19C1BB1CC76FCE008AFE48 /* FMDatabaseReadWritePool.m in Sources */,
 				621721B41892BFE30006691F /* FMDatabaseQueue.m in Sources */,
+				AA05D2511CC940410051039E /* FMBlob.m in Sources */,
 				621721B51892BFE30006691F /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -735,6 +757,7 @@
 				83C73F161C326B9400FFC730 /* FMDatabaseAdditions.m in Sources */,
 				AA19C1B71CC76FC8008AFE48 /* FMDatabaseReadWritePool.m in Sources */,
 				83C73F151C326B9400FFC730 /* FMDatabaseQueue.m in Sources */,
+				AA05D2521CC940420051039E /* FMBlob.m in Sources */,
 				AAB002BD1CC76A4E00A2C7EB /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -748,6 +771,7 @@
 				83C73F201C326BC100FFC730 /* FMDatabaseQueue.m in Sources */,
 				AA19C1BA1CC76FCC008AFE48 /* FMDatabaseReadWritePool.m in Sources */,
 				83C73F211C326BC100FFC730 /* FMDatabaseAdditions.m in Sources */,
+				AA05D2531CC940420051039E /* FMBlob.m in Sources */,
 				AAB002BE1CC76A4F00A2C7EB /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCC24EC20A13E34D00A6D3E3 /* FMDatabase.m in Sources */,
+				AA05D24B1CC940280051039E /* FMBlob.m in Sources */,
 				AAB002BA1CC769CE00A2C7EB /* FMDatabasePool.m in Sources */,
 				CCA66A2F19C0CB1900EFDAC1 /* FMTokenizers.m in Sources */,
 				CCC24EC50A13E34D00A6D3E3 /* main.m in Sources */,
@@ -778,6 +803,7 @@
 				AAB002A61CC75F9800A2C7EB /* FMDatabaseAdditionsTests.m in Sources */,
 				AAB002A71CC75F9800A2C7EB /* FMResultSetTests.m in Sources */,
 				AAB002A81CC75F9800A2C7EB /* FMDatabaseTests.m in Sources */,
+				AA05D2551CC9454B0051039E /* FMBlobTests.m in Sources */,
 				AAB002A91CC75F9800A2C7EB /* FMDatabaseFTS3Tests.m in Sources */,
 				AAB002AA1CC75F9800A2C7EB /* FMDatabasePoolTests.m in Sources */,
 				AAB002AB1CC75F9800A2C7EB /* FMDatabaseQueueTests.m in Sources */,
@@ -796,6 +822,7 @@
 				BF940F5E18417DEA0001E077 /* FMDatabaseAdditionsTests.m in Sources */,
 				3354379C19E71096005661F3 /* FMResultSetTests.m in Sources */,
 				BF5D042118416BB2008C5AA9 /* FMDatabaseTests.m in Sources */,
+				AA05D2561CC9454B0051039E /* FMBlobTests.m in Sources */,
 				AAB002C41CC76B4300A2C7EB /* FMDatabasePoolTests.m in Sources */,
 				67CB1E3019AD27D000A3CA7F /* FMDatabaseFTS3Tests.m in Sources */,
 				BFE55E151841D38800CB3A63 /* FMDatabaseQueueTests.m in Sources */,
@@ -814,6 +841,7 @@
 				EE42910A12B42FD20088BD94 /* FMResultSet.m in Sources */,
 				AA19C1B81CC76FC9008AFE48 /* FMDatabaseReadWritePool.m in Sources */,
 				AAB002BB1CC76A4C00A2C7EB /* FMDatabasePool.m in Sources */,
+				AA05D2501CC9403F0051039E /* FMBlob.m in Sources */,
 				CC47A011148581E9002CCDAB /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
