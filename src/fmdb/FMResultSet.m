@@ -153,11 +153,14 @@
 
 
 - (BOOL)next {
-    return [self nextWithError:nil];
+    BOOL valid;
+    [self nextReturning:&valid error:nil];
+    return valid;
 }
 
-- (BOOL)nextWithError:(NSError **)outErr {
-    
+- (BOOL)nextReturning:(BOOL *)valid error:(NSError **)outErr {
+  
+    BOOL ret = NO;
     int rc = sqlite3_step([_statement statement]);
     
     if (SQLITE_BUSY == rc || SQLITE_LOCKED == rc) {
@@ -169,6 +172,7 @@
     }
     else if (SQLITE_DONE == rc || SQLITE_ROW == rc) {
         // all is well, let's return.
+        ret = YES;
     }
     else if (SQLITE_ERROR == rc) {
         NSLog(@"Error calling sqlite3_step (%d: %s) rs", rc, sqlite3_errmsg([_parentDB sqliteHandle]));
@@ -204,8 +208,10 @@
     if (rc != SQLITE_ROW) {
         [self close];
     }
+
+    *valid = rc == SQLITE_ROW;
     
-    return (rc == SQLITE_ROW);
+    return ret;
 }
 
 - (BOOL)hasAnotherRow {

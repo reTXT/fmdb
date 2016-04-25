@@ -917,8 +917,16 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
     return [self executeQuery:sql withArgumentsInArray:arguments orDictionary:nil orVAList:nil];
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error {
+- (FMResultSet *)executeQuery:(NSString *)sql valuesArray:(NSArray *)values error:(NSError * __autoreleasing *)error {
     FMResultSet *rs = [self executeQuery:sql withArgumentsInArray:values orDictionary:nil orVAList:nil];
+    if (!rs && error) {
+        *error = [self lastError];
+    }
+    return rs;
+}
+
+- (FMResultSet *)executeQuery:(NSString *)sql valuesDictionary:(NSDictionary *)values error:(NSError * __autoreleasing *)error {
+    FMResultSet *rs = [self executeQuery:sql withArgumentsInArray:nil orDictionary:values orVAList:nil];
     if (!rs && error) {
         *error = [self lastError];
     }
@@ -1163,8 +1171,12 @@ static int FMDBDatabaseBusyHandler(void *f, int count) {
     return [self executeUpdate:sql error:nil withArgumentsInArray:arguments orDictionary:nil orVAList:nil];
 }
 
-- (BOOL)executeUpdate:(NSString*)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error {
+- (BOOL)executeUpdate:(NSString*)sql valuesArray:(nullable NSArray *)values error:(NSError * _Nullable __autoreleasing * _Nullable)error {
     return [self executeUpdate:sql error:error withArgumentsInArray:values orDictionary:nil orVAList:nil];
+}
+
+- (BOOL)executeUpdate:(NSString*)sql valuesDictionary:(nullable NSDictionary *)values error:(NSError * _Nullable __autoreleasing * _Nullable)error {
+    return [self executeUpdate:sql error:error withArgumentsInArray:nil orDictionary:values orVAList:nil];
 }
 
 - (BOOL)executeUpdate:(NSString*)sql withParameterDictionary:(NSDictionary *)arguments {
@@ -1455,6 +1467,52 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 #else
     sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (__bridge void*)b, &FMDBBlockSQLiteCallBackFunction, 0x00, 0x00);
 #endif
+}
+
+#pragma mark Collation
+
+
+int FMDBBlockSQLiteCollationInvoke(void* context, int alen, const void *adata, int blen, const void* bdata);
+int FMDBBlockSQLiteCollationInvoke(void* context, int alen, const void *adata, int blen, const void* bdata) {
+    
+    NSString *as = adata ? [[NSString alloc] initWithBytesNoCopy:(void *)adata length:alen encoding:NSUTF8StringEncoding freeWhenDone:NO] : nil;
+    NSString *bs = bdata ? [[NSString alloc] initWithBytesNoCopy:(void *)bdata length:blen encoding:NSUTF8StringEncoding freeWhenDone:NO] : nil;
+    
+    FMDBCollationBlock block = (__bridge FMDBCollationBlock)context;
+    
+    return (int)block(as, bs);
+}
+
+void FMDBBlockSQLiteCollationDestroy(void *context);
+void FMDBBlockSQLiteCollationDestroy(void *context) {
+    id blockToFree = (__bridge_transfer id)context;
+    (void)blockToFree;
+}
+
+- (BOOL)makeCollationNamed:(NSString *)name encoding:(NSStringEncoding)encoding withBlock:(FMDBCollationBlock)block {
+    
+    int eTextRep;
+    
+    switch (encoding) {
+        case NSUTF8StringEncoding:
+            eTextRep = SQLITE_UTF8;
+            break;
+        case NSUTF16StringEncoding:
+            eTextRep = SQLITE_UTF16;
+            break;
+        case NSUTF16BigEndianStringEncoding:
+            eTextRep = SQLITE_UTF16BE;
+            break;
+        case NSUTF16LittleEndianStringEncoding:
+            eTextRep = SQLITE_UTF16LE;
+            break;
+        default:
+            return NO;
+    }
+    
+    sqlite3_create_collation_v2([self sqliteHandle], [name UTF8String], eTextRep, (__bridge void *)block, FMDBBlockSQLiteCollationInvoke, FMDBBlockSQLiteCollationDestroy);
+    
+    return YES;
 }
 
 @end

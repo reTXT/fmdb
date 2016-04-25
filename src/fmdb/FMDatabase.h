@@ -405,7 +405,8 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  
  */
 
-- (BOOL)executeUpdate:(NSString*)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error;
+- (BOOL)executeUpdate:(NSString*)sql valuesArray:(nullable NSArray *)values error:(NSError * __autoreleasing *)error;
+- (BOOL)executeUpdate:(NSString*)sql valuesDictionary:(nullable NSDictionary *)values error:(NSError * __autoreleasing *)error;
 
 /** Execute single update statement
 
@@ -459,7 +460,7 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-- (BOOL)executeStatements:(NSString *)sql;
+- (BOOL)executeStatements:(NSString *)sql NS_SWIFT_UNAVAILABLE("Use error handling version instead");
 - (BOOL)executeStatements:(NSString *)sql error:(NSError **)error;
 
 /** Execute multiple SQL statements with callback handler
@@ -612,7 +613,8 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
 
  */
 
-- (nullable FMResultSet *)executeQuery:(NSString *)sql values:(NSArray *)values error:(NSError * __autoreleasing *)error;
+- (nullable FMResultSet *)executeQuery:(NSString *)sql valuesArray:(nullable NSArray *)values error:(NSError * __autoreleasing *)error;
+- (nullable FMResultSet *)executeQuery:(NSString *)sql valuesDictionary:(nullable NSDictionary *)values error:(NSError * __autoreleasing *)error;
 
 /** Execute select statement
 
@@ -1016,6 +1018,11 @@ typedef int(^FMDBExecuteStatementsCallbackBlock)(NSDictionary *resultsDictionary
  */
 
 - (void)makeFunctionNamed:(NSString*)name maximumArguments:(int)count withBlock:(void (^)(void *context, int argc, void *__nullable *__nonnull argv))block;
+
+
+typedef NSComparisonResult (^FMDBCollationBlock)(NSString * _Nullable, NSString * _Nullable);
+
+- (BOOL)makeCollationNamed:(NSString *)name encoding:(NSStringEncoding)encoding withBlock:(FMDBCollationBlock)block;
 
 
 ///---------------------

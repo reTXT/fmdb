@@ -62,6 +62,10 @@ return ret;
     RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(NSDate *, dateForColumnIndex);
 }
 
+- (id)objectForQuery:(NSString*)query, ... {
+    RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(id, objectForColumnIndex);
+}
+
 
 - (BOOL)tableExists:(NSString*)tableName {
     

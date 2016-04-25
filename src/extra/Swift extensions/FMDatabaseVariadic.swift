@@ -21,9 +21,13 @@ extension FMDatabase {
     /// - returns:           This returns FMResultSet if successful. If unsuccessful, it throws an error.
     
     public func executeQuery(sql:String, _ values: AnyObject...) throws -> FMResultSet {
-        return try executeQuery(sql, values: values as [AnyObject]);
+        return try executeQuery(sql, valuesArray: values);
     }
     
+    public func executeQuery(sql:String, _ values: [String: AnyObject]) throws -> FMResultSet {
+        return try executeQuery(sql, valuesDictionary: values);
+    }
+  
     /// This is a rendition of executeUpdate that handles Swift variadic parameters
     /// for the values to be bound to the ? placeholders in the SQL.
     ///
@@ -33,6 +37,11 @@ extension FMDatabase {
     /// - parameter values:  The values to be bound to the ? placeholders
     
     public func executeUpdate(sql:String, _ values: AnyObject...) throws {
-        try executeUpdate(sql, values: values as [AnyObject]);
+        try executeUpdate(sql, valuesArray: values);
     }
+
+    public func executeUpdate(sql:String, _ values: [String: AnyObject]) throws {
+        try executeUpdate(sql, valuesDictionary: values);
+    }
+  
 }

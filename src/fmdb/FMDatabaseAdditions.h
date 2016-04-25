@@ -99,16 +99,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSData*)dataForQuery:(NSString*)query, ...;
 
 /** Return `NSDate` value for query
-
+ 
  @param query The SQL query to be performed.
  @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
-
+ 
  @return `NSDate` value.
  
  @note To use this method from Swift, you must include `FMDatabaseAdditionsVariadic.swift` in your project.
  */
 
 - (nullable NSDate*)dateForQuery:(NSString*)query, ...;
+
+/** Return object value for query
+ 
+ @param query The SQL query to be performed.
+ @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
+ 
+ @return object value.
+ 
+ @note To use this method from Swift, you must include `FMDatabaseAdditionsVariadic.swift` in your project.
+ */
+
+- (nullable id)objectForQuery:(NSString*)query, ...;
 
 
 // Notice that there's no dataNoCopyForQuery:.
