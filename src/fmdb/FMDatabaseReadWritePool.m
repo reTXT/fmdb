@@ -6,10 +6,14 @@
 //  Copyright 2014 reTXT, Inc. All rights reserved.
 //
 
+#if FMDB_SQLITE_STANDALONE
+#import <sqlite3/sqlite3.h>
+#else
+#import <sqlite3.h>
+#endif
+
 #import "FMDatabaseReadWritePool.h"
 #import "FMDatabase.h"
-
-#import "sqlite3.h"
 
 
 @interface FMDatabaseReadWritePool()
@@ -119,7 +123,9 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
 }
 
 - (void)dealloc {
-    
+  
+    [self close];
+  
     self->_delegate = 0x00;
     FMDBRelease(self->_path);
     FMDBRelease(self->_writerDatabase);
@@ -141,6 +147,10 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
 
 -(void) close
 {
+    if (_closed) {
+      return;
+    }
+  
     _closed = YES;
   
     [self releaseAllDatabases];
@@ -333,7 +343,7 @@ static const void * const kDispatchPoolSpecificKey = &kDispatchPoolSpecificKey;
     block(db);
   
     [self releaseReadableDB:db];
-  
+
 }
 
 - (void)inWritableDatabase:(void (^)(FMDatabase *db))block {
